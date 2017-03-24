@@ -12,7 +12,7 @@ get_power_data <- function() {
     ##Subset by date and convert to kilowatts
     power %<>% unite(Datetime, Date, Time, sep=' ')
     power$Datetime %<>% dmy_hms
-    range <- interval(ymd(20070201), ymd(20070202))
+    range <- interval(ymd(20070201), ymd_hms('20070202 23:59:59'))
     power <- power[power$Datetime %within% range,]
     power$Global_active_power %<>% as.numeric %>% divide_by(1000)
     
